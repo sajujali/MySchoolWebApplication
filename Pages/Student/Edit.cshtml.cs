@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -49,7 +50,7 @@ namespace WebApplication1.Pages.Student
             }
 
             _context.Attach(Student).State = EntityState.Modified;
-
+           
             try
             {
                 await _context.SaveChangesAsync();
@@ -68,6 +69,7 @@ namespace WebApplication1.Pages.Student
 
             return RedirectToPage("./Index");
         }
+       
 
         private bool StudentExists(int id)
         {

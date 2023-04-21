@@ -23,6 +23,16 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Student.Class)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Student.ProfileImageName)
+        </dt>
+        
+        <dd class="col-sm-10">
+            <img src="https://newschoolsajustorage.blob.core.windows.net/school-image/@Model.Student.ProfileImageName"
+                 class="rounded-circle"
+                 height="40" width="40"
+                 asp-append-version="true" />
+        </dd>
     </dl>
 </div>
 <div>

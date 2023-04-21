@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MySchool.Areas.Identity.Data;
 
 namespace MySchool.Data;
 
-public class MySchoolContext : IdentityDbContext<IdentityUser>
+public class MySchoolContext : IdentityDbContext<MySchoolUser>
 {
     public MySchoolContext(DbContextOptions<MySchoolContext> options)
         : base(options)

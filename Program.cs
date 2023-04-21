@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebApplication1.Data;
 using Microsoft.AspNetCore.Identity;
-using MySchool.Data;
+
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 using Microsoft.AspNetCore.Authorization;
@@ -17,22 +17,28 @@ using Microsoft.Extensions.Logging;
 using System.Configuration;
 using Microsoft.AspNetCore.Authentication;
 
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using MySchool.Data;
+using MySchool.Areas.Identity.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 
 builder.Services.AddAuthorization(options =>
-
 {
     options.FallbackPolicy = options.DefaultPolicy;
 });
+//builder.Services.AddDefaultIdentity<MySchoolUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<MySchoolContext>();
 
 // Add services to the container.
-builder.Services.AddRazorPages()
-    .AddMicrosoftIdentityUI();
+builder.Services.AddRazorPages().AddMicrosoftIdentityUI();
 builder.Services.AddDbContext<WebApplication1Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WebApplication1Context") ?? throw new InvalidOperationException("Connection string 'WebApplication1Context' not found.")));
+
+/*builder.Services.AddDefaultIdentity<MySchoolUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<MySchoolContext>();
 
 /*builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration,"AzureAD");
 builder.Services.AddMvc(option =>
